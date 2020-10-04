@@ -100,10 +100,14 @@ interface b2Shape {
   attribute float m_radius;
 };
 
+interface b2FixtureUserData {
+  attribute any pointer;
+};
+
 interface b2FixtureDef {
   void b2FixtureDef();
   [Const] attribute b2Shape shape;
-  attribute any userData;
+  attribute b2FixtureUserData userData;
   attribute float friction;
   attribute float restitution;
   attribute float density;
@@ -121,7 +125,7 @@ interface b2Fixture {
   void Refilter();
   b2Body GetBody();
   b2Fixture GetNext();
-  any GetUserData();
+  [Ref] b2FixtureUserData GetUserData();
   void SetUserData(any data);
   boolean TestPoint([Ref] b2Vec2 p);
   boolean RayCast(b2RayCastOutput output, [Ref] b2RayCastInput input, long childIndex);
@@ -200,6 +204,10 @@ interface b2Vec3 {
   attribute float z;
 };
 
+interface b2BodyUserData {
+  attribute any pointer;
+};
+
 [NoDelete]
 interface b2Body {
   b2Fixture CreateFixture(b2FixtureDef def);
@@ -253,7 +261,7 @@ interface b2Body {
   b2JointEdge GetJointList();
   b2ContactEdge GetContactList();
   b2Body GetNext();
-  any GetUserData();
+  [Ref] b2BodyUserData GetUserData();
   void SetUserData(any data);
   b2World GetWorld();
   void Dump();
@@ -280,7 +288,7 @@ interface b2BodyDef {
   attribute boolean fixedRotation;
   attribute boolean bullet;
   attribute boolean active;
-  attribute any userData;
+  attribute b2BodyUserData userData;
   attribute float gravityScale;
 };
 
@@ -348,10 +356,14 @@ enum b2LimitState {
   "e_equalLimits"
 };
 
+interface b2JointUserData {
+  attribute any pointer;
+};
+
 interface b2JointDef {
   void b2JointDef();
   attribute b2JointType type;
-  attribute any userData;
+  attribute b2JointUserData userData;
   attribute b2Body bodyA;
   attribute b2Body bodyB;
   attribute boolean collideConnected;
@@ -367,7 +379,7 @@ interface b2Joint {
   [Value] b2Vec2 GetReactionForce(float inv_dt);
   float GetReactionTorque(float inv_dt);
   b2Joint GetNext();
-  any GetUserData();
+  [Ref] b2JointUserData GetUserData();
   void SetUserData(any data);
   boolean IsActive();
   boolean GetCollideConnected();
