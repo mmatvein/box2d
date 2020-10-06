@@ -49,7 +49,7 @@ interface b2World {
   void DestroyJoint(b2Joint joint);
   void Step(float timeStep, long velocityIterations, long positionIterations);
   void ClearForces();
-  void DrawDebugData();
+  void DebugDraw();
   void QueryAABB(b2QueryCallback callback, [Ref] b2AABB aabb);
   void RayCast(b2RayCastCallback callback, [Ref] b2Vec2 point1, [Ref] b2Vec2 point2);
   b2Body GetBodyList();
@@ -101,13 +101,13 @@ interface b2Shape {
 };
 
 interface b2FixtureUserData {
-  attribute any pointer;
+  attribute unsigned long pointer;
 };
 
 interface b2FixtureDef {
   void b2FixtureDef();
   [Const] attribute b2Shape shape;
-  attribute b2FixtureUserData userData;
+  [Value] attribute b2FixtureUserData userData;
   attribute float friction;
   attribute float restitution;
   attribute float density;
@@ -126,7 +126,6 @@ interface b2Fixture {
   b2Body GetBody();
   b2Fixture GetNext();
   [Ref] b2FixtureUserData GetUserData();
-  void SetUserData(any data);
   boolean TestPoint([Ref] b2Vec2 p);
   boolean RayCast(b2RayCastOutput output, [Ref] b2RayCastInput input, long childIndex);
   void GetMassData(b2MassData massData);
@@ -205,7 +204,7 @@ interface b2Vec3 {
 };
 
 interface b2BodyUserData {
-  attribute any pointer;
+  attribute unsigned long pointer;
 };
 
 [NoDelete]
@@ -253,8 +252,6 @@ interface b2Body {
   boolean IsSleepingAllowed();
   void SetAwake(boolean flag);
   boolean IsAwake();
-  void SetActive(boolean flag);
-  boolean IsActive();
   void SetFixedRotation(boolean flag);
   boolean IsFixedRotation();
   b2Fixture GetFixtureList();
@@ -287,8 +284,7 @@ interface b2BodyDef {
   attribute boolean awake;
   attribute boolean fixedRotation;
   attribute boolean bullet;
-  attribute boolean active;
-  attribute b2BodyUserData userData;
+  [Value] attribute b2BodyUserData userData;
   attribute float gravityScale;
 };
 
@@ -322,14 +318,14 @@ b2CircleShape implements b2Shape;
 
 interface b2EdgeShape {
   void b2EdgeShape();
-  void Set([Ref] b2Vec2 v1, [Ref] b2Vec2 v2);
+  void SetOneSided([Const,Ref] b2Vec2 v0, [Const,Ref] b2Vec2 v1, [Const,Ref] b2Vec2 v2, [Const,Ref] b2Vec2 v3);
+  void SetTwoSided([Const,Ref] b2Vec2 v1, [Const,Ref] b2Vec2 v2);
 
   [Value] attribute b2Vec2 m_vertex1;
   [Value] attribute b2Vec2 m_vertex2;
   [Value] attribute b2Vec2 m_vertex0;
   [Value] attribute b2Vec2 m_vertex3;
-  attribute boolean m_hasVertex0;
-  attribute boolean m_hasVertex3;
+  attribute boolean m_oneSided;
 };
 
 b2EdgeShape implements b2Shape;
@@ -357,13 +353,13 @@ enum b2LimitState {
 };
 
 interface b2JointUserData {
-  attribute any pointer;
+  attribute unsigned long pointer;
 };
 
 interface b2JointDef {
   void b2JointDef();
   attribute b2JointType type;
-  attribute b2JointUserData userData;
+  [Value] attribute b2JointUserData userData;
   attribute b2Body bodyA;
   attribute b2Body bodyB;
   attribute boolean collideConnected;
@@ -380,8 +376,6 @@ interface b2Joint {
   float GetReactionTorque(float inv_dt);
   b2Joint GetNext();
   [Ref] b2JointUserData GetUserData();
-  void SetUserData(any data);
-  boolean IsActive();
   boolean GetCollideConnected();
   void Dump();
 };
