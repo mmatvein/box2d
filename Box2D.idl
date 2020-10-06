@@ -383,10 +383,11 @@ interface b2Joint {
 interface b2WeldJoint {
   [Const, Ref] b2Vec2 GetLocalAnchorA();
   [Const, Ref] b2Vec2 GetLocalAnchorB();
-  void SetFrequency(float hz);
-  float GetFrequency();
-  void SetDampingRatio(float ratio);
-  float GetDampingRatio();
+  float GetReferenceAngle();
+  void SetStiffness(float stiffness);
+  float GetStiffness();
+  void SetDamping(float damping);
+  float GetDamping();
   void Dump();
 };
 
@@ -398,8 +399,8 @@ interface b2WeldJointDef {
   [Value] attribute b2Vec2 localAnchorA;
   [Value] attribute b2Vec2 localAnchorB;
   attribute float referenceAngle;
-  attribute float frequencyHz;
-  attribute float dampingRatio;
+  attribute float stiffness;
+  attribute float damping;
 };
 
 b2WeldJointDef implements b2JointDef;
@@ -407,18 +408,14 @@ b2WeldJointDef implements b2JointDef;
 interface b2ChainShape {
   void b2ChainShape();
   void Clear();
-  void CreateLoop(b2Vec2 vertices, long count);
-  void CreateChain(b2Vec2 vertices, long count);
-  void SetPrevVertex([Ref] b2Vec2 prevVertex);
-  void SetNextVertex([Ref] b2Vec2 nextVertex);
+  void CreateLoop([Const] b2Vec2 vertices, long count);
+  void CreateChain([Const] b2Vec2 vertices, long count, [Const,Ref] b2Vec2 prevVertex, [Const,Ref] b2Vec2 nextVertex);
   void GetChildEdge(b2EdgeShape edge, long index);
 
   attribute b2Vec2 m_vertices;
   attribute long m_count;
   [Value] attribute b2Vec2 m_prevVertex;
   [Value] attribute b2Vec2 m_nextVertex;
-  attribute boolean m_hasPrevVertex;
-  attribute boolean m_hasNextVertex;
 };
 
 b2ChainShape implements b2Shape;
@@ -492,24 +489,31 @@ interface JSDestructionListener {
 interface b2DistanceJoint {
   [Const, Ref] b2Vec2 GetLocalAnchorA();
   [Const, Ref] b2Vec2 GetLocalAnchorB();
-  void SetLength(float length);
   float GetLength();
-  void SetFrequency(float hz);
-  float GetFrequency();
-  void SetDampingRatio(float ratio);
-  float GetDampingRatio();
+  void SetLength(float length);
+  float GetMinLength();
+  void SetMinLength(float minLength);
+  float GetMaxLength();
+  void SetMaxLength(float maxLength);
+  float GetCurrentLength();
+  void SetStiffness(float stiffness);
+  float GetStiffness();
+  void SetDamping(float damping);
+  float GetDamping();
 };
 
 b2DistanceJoint implements b2Joint;
 
 interface b2DistanceJointDef {
   void b2DistanceJointDef();
-  void Initialize(b2Body bodyA, b2Body bodyB, [Ref] b2Vec2 anchorA, [Ref] b2Vec2 anchorB);
+  void Initialize(b2Body bodyA, b2Body bodyB, [Const,Ref] b2Vec2 anchorA, [Const,Ref] b2Vec2 anchorB);
   [Value] attribute b2Vec2 localAnchorA;
   [Value] attribute b2Vec2 localAnchorB;
   attribute float length;
-  attribute float frequencyHz;
-  attribute float dampingRatio;
+  attribute float minLength;
+  attribute float maxLength;
+  attribute float stiffness;
+  attribute float damping;
 };
 
 b2DistanceJointDef implements b2JointDef;
@@ -653,10 +657,10 @@ interface b2MouseJoint {
   [Const, Ref] b2Vec2 GetTarget();
   void SetMaxForce(float force);
   float GetMaxForce();
-  void SetFrequency(float hz);
-  float GetFrequency();
-  void SetDampingRatio(float ratio);
-  float GetDampingRatio();
+  void SetStiffness(float stiffness);
+  float GetStiffness();
+  void SetDamping(float damping);
+  float GetDamping();
 };
 
 b2MouseJoint implements b2Joint;
@@ -665,8 +669,8 @@ interface b2MouseJointDef {
   void b2MouseJointDef();
   [Value] attribute b2Vec2 target;
   attribute float maxForce;
-  attribute float frequencyHz;
-  attribute float dampingRatio;
+  attribute float stiffness;
+  attribute float damping;
 };
 
 b2MouseJointDef implements b2JointDef;
@@ -676,8 +680,6 @@ interface b2PolygonShape {
   void Set(b2Vec2 vertices, long vertexCount);
   void SetAsBox(float hx, float hy);
   void SetAsBox(float hx, float hy, [Ref] b2Vec2 center, float angle);
-  long GetVertexCount();
-  [Const, Ref] b2Vec2 GetVertex(long index);
   [Value] attribute b2Vec2 m_centroid;
 
   // TODO: webidl_binder support for array types.
