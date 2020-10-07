@@ -259,7 +259,6 @@ interface b2Body {
   b2ContactEdge GetContactList();
   b2Body GetNext();
   [Ref] b2BodyUserData GetUserData();
-  void SetUserData(any data);
   b2World GetWorld();
   void Dump();
 };
@@ -907,3 +906,4 @@ enum b2PointState {
 };
 
 // TODO: b2_collision.h
+// TODO: b2_rope
