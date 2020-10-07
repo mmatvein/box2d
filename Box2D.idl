@@ -345,13 +345,6 @@ enum b2JointType {
   "e_motorJoint"
 };
 
-enum b2LimitState {
-  "e_inactiveLimit",
-  "e_atLowerLimit",
-  "e_atUpperLimit",
-  "e_equalLimits"
-};
-
 interface b2JointUserData {
   attribute unsigned long pointer;
 };
@@ -542,6 +535,7 @@ interface JSDraw {
   void DrawSolidCircle([Const, Ref] b2Vec2 center, float radius, [Const, Ref] b2Vec2 axis, [Const, Ref] b2Color color);
   void DrawSegment([Const, Ref] b2Vec2 p1, [Const, Ref] b2Vec2 p2, [Const, Ref] b2Color color);
   void DrawTransform([Const, Ref] b2Transform xf);
+  void DrawPoint([Const, Ref] b2Vec2 p, float size, [Const, Ref] b2Color color);
 };
 
 interface b2FrictionJoint {
@@ -819,24 +813,6 @@ interface b2RevoluteJointDef {
 
 b2RevoluteJointDef implements b2JointDef;
 
-interface b2RopeJoint {
-  [Const, Ref] b2Vec2 GetLocalAnchorA();
-  [Const, Ref] b2Vec2 GetLocalAnchorB();
-  void SetMaxLength(float length);
-  float GetMaxLength();
-  b2LimitState GetLimitState();
-};
-
-b2RopeJoint implements b2Joint;
-
-interface b2RopeJointDef {
-  void b2RopeJointDef();
-  [Value] attribute b2Vec2 localAnchorA;
-  [Value] attribute b2Vec2 localAnchorB;
-  attribute float maxLength;
-};
-b2RopeJointDef implements b2JointDef;
-
 interface b2Rot {
   void b2Rot();
   void b2Rot(float angle);
@@ -854,7 +830,14 @@ interface b2WheelJoint {
   [Const, Ref] b2Vec2 GetLocalAnchorB();
   [Const, Ref] b2Vec2 GetLocalAxisA();
   float GetJointTranslation();
-  float GetJointSpeed();
+  float GetJointLinearSpeed();
+  float GetJointAngle();
+  float GetJointAngularSpeed();
+  boolean IsLimitEnabled();
+  void EnableLimit(boolean flag);
+  float GetLowerLimit();
+  float GetUpperLimit();
+  void SetLimits(float lower, float upper);
   boolean IsMotorEnabled();
   void EnableMotor(boolean flag);
   void SetMotorSpeed(float speed);
@@ -862,25 +845,28 @@ interface b2WheelJoint {
   void SetMaxMotorTorque(float torque);
   float GetMaxMotorTorque();
   float GetMotorTorque(float inv_dt);
-  void SetSpringFrequencyHz(float hz);
-  float GetSpringFrequencyHz();
-  void SetSpringDampingRatio(float ratio);
-  float GetSpringDampingRatio();
+  void SetStiffness(float stiffness);
+  float GetStiffness();
+  void SetDamping(float damping);
+  float GetDamping();
 };
 
 b2WheelJoint implements b2Joint;
 
 interface b2WheelJointDef {
   void b2WheelJointDef();
-  void Initialize(b2Body bodyA, b2Body bodyB, [Ref] b2Vec2 anchor, [Ref] b2Vec2 axis);
+  void Initialize(b2Body bodyA, b2Body bodyB, [Const,Ref] b2Vec2 anchor, [Const,Ref] b2Vec2 axis);
   [Value] attribute b2Vec2 localAnchorA;
   [Value] attribute b2Vec2 localAnchorB;
   [Value] attribute b2Vec2 localAxisA;
+  attribute boolean enableLimit;
+  attribute float lowerTranslation;
+  attribute float upperTranslation;
   attribute boolean enableMotor;
   attribute float maxMotorTorque;
   attribute float motorSpeed;
-  attribute float frequencyHz;
-  attribute float dampingRatio;
+  attribute float stiffness;
+  attribute float damping;
 };
 
 b2WheelJointDef implements b2JointDef;
@@ -912,3 +898,12 @@ interface b2MotorJointDef {
 };
 
 b2MotorJointDef implements b2JointDef;
+
+enum b2PointState {
+  "b2_nullState",
+  "b2_addState",
+  "b2_persistState",
+  "b2_removeState"
+};
+
+// TODO: b2_collision.h
