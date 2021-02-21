@@ -26,8 +26,8 @@
 /// Number of bits used to store each b2ParticleColor component.
 const uint8 b2ParticleColor::k_bitsPerComponent =
 	B2PARTICLECOLOR_BITS_PER_COMPONENT;
-const float32 b2ParticleColor::k_maxValue = (float)B2PARTICLECOLOR_MAX_VALUE;
-const float32 b2ParticleColor::k_inverseMaxValue =
+const float b2ParticleColor::k_maxValue = (float)B2PARTICLECOLOR_MAX_VALUE;
+const float b2ParticleColor::k_inverseMaxValue =
 	1.0f / (float)B2PARTICLECOLOR_MAX_VALUE;
 
 b2ParticleColor b2ParticleColor_zero(0, 0, 0, 0);
@@ -53,12 +53,12 @@ void b2ParticleColor::Set(const b2Color& color)
 }
 
 int32 b2CalculateParticleIterations(
-	float32 gravity, float32 radius, float32 timeStep)
+	float gravity, float radius, float timeStep)
 {
 	// In some situations you may want more particle iterations than this,
 	// but to avoid excessive cycle cost, don't recommend more than this.
 	const int32 B2_MAX_RECOMMENDED_PARTICLE_ITERATIONS = 8;
-	const float32 B2_RADIUS_THRESHOLD = 0.01f;
+	const float B2_RADIUS_THRESHOLD = 0.01f;
 	int32 iterations =
 		(int32) ceilf(b2Sqrt(gravity / (B2_RADIUS_THRESHOLD * radius)) * timeStep);
 	return b2Clamp(iterations, 1, B2_MAX_RECOMMENDED_PARTICLE_ITERATIONS);

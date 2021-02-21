@@ -165,7 +165,7 @@ public:
 
 	/// Compute the distance from this fixture.
 	/// @param p a point in world coordinates.
-	void ComputeDistance(const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const;
+	void ComputeDistance(const b2Vec2& p, float* distance, b2Vec2* normal, int32 childIndex) const;
 
 	/// Cast a ray against this shape.
 	/// @param output the ray-cast results.

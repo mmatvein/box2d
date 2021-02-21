@@ -64,7 +64,7 @@ public:
 	bool TestPoint(const b2Transform& transform, const b2Vec2& p) const override;
 
 	// @see b2Shape::ComputeDistance
-	void ComputeDistance(const b2Transform& xf, const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const;
+	void ComputeDistance(const b2Transform& xf, const b2Vec2& p, float* distance, b2Vec2* normal, int32 childIndex) const;
 
 	/// Implement b2Shape.
 	/// @note because the polygon is solid, rays that start inside do not hit because the normal is
@@ -84,15 +84,15 @@ public:
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Set centroid with direct floats.
-	void SetCentroid(float32 x, float32 y);
+	void SetCentroid(float x, float y);
 
 	/// SetAsBox with direct floats for center.
 	/// @see b2Shape::SetAsBox
-	void SetAsBox(float32 hx,
-								float32 hy,
-								float32 centerX,
-								float32 centerY,
-								float32 angle);
+	void SetAsBox(float hx,
+								float hy,
+								float centerX,
+								float centerY,
+								float angle);
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 	b2Vec2 m_centroid;
@@ -110,16 +110,16 @@ inline b2PolygonShape::b2PolygonShape()
 }
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-inline void b2PolygonShape::SetCentroid(float32 x, float32 y)
+inline void b2PolygonShape::SetCentroid(float x, float y)
 {
 	m_centroid.Set(x, y);
 }
 
-inline void b2PolygonShape::SetAsBox(float32 hx,
-										 float32 hy,
-										 float32 centerX,
-										 float32 centerY,
-										 float32 angle) {
+inline void b2PolygonShape::SetAsBox(float hx,
+										 float hy,
+										 float centerX,
+										 float centerY,
+										 float angle) {
 	SetAsBox(hx, hy, b2Vec2(centerX, centerY), angle);
 }
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API

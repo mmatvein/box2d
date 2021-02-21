@@ -27,22 +27,22 @@ public:
 	b2Stat();
 
 	/// Record a sample
-	void Record( float32 t );
+	void Record( float t );
 
 	/// Returns the number of recorded samples
 	int GetCount() const;
 
 	/// Returns the mean of all recorded samples,
 	/// Returns 0 if there are no recorded samples
-	float32 GetMean() const;
+	float GetMean() const;
 
 	/// Returns the min of all recorded samples,
 	/// FLT_MAX if there are no recorded samples
-	float32 GetMin() const;
+	float GetMin() const;
 
 	/// Returns the max of all recorded samples,
 	/// -FLT_MAX if there are no recorded samples
-	float32 GetMax() const;
+	float GetMax() const;
 
 	/// Erase all recorded samples
 	void Clear();
@@ -50,8 +50,8 @@ private:
 
 	int m_count;
 	float64 m_total;
-	float32 m_min;
-	float32 m_max;
+	float m_min;
+	float m_max;
 };
 
 #endif

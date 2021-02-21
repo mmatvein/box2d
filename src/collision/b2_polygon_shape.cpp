@@ -264,17 +264,17 @@ bool b2PolygonShape::TestPoint(const b2Transform& xf, const b2Vec2& p) const
 	return true;
 }
 
-void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const
+void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float* distance, b2Vec2* normal, int32 childIndex) const
 {
 	B2_NOT_USED(childIndex);
 
 	b2Vec2 pLocal = b2MulT(xf.q, p - xf.p);
-	float32 maxDistance = -FLT_MAX;
+	float maxDistance = -FLT_MAX;
 	b2Vec2 normalForMaxDistance = pLocal;
 
 	for (int32 i = 0; i < m_count; ++i)
 	{
-		float32 dot = b2Dot(m_normals[i], pLocal - m_vertices[i]);
+		float dot = b2Dot(m_normals[i], pLocal - m_vertices[i]);
 		if (dot > maxDistance)
 		{
 			maxDistance = dot;
@@ -285,11 +285,11 @@ void b2PolygonShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, flo
 	if (maxDistance > 0)
 	{
 		b2Vec2 minDistance = normalForMaxDistance;
-		float32 minDistance2 = maxDistance * maxDistance;
+		float minDistance2 = maxDistance * maxDistance;
 		for (int32 i = 0; i < m_count; ++i)
 		{
 			b2Vec2 distance = pLocal - m_vertices[i];
-			float32 distance2 = distance.LengthSquared();
+			float distance2 = distance.LengthSquared();
 			if (minDistance2 > distance2)
 			{
 				minDistance = distance;

@@ -70,7 +70,7 @@ private:
 	/// Weight of the contact. A value between 0.0f and 1.0f.
 	/// 0.0f ==> particles are just barely touching
 	/// 1.0f ==> particles are perfectly on top of each other
-	float32 weight;
+	float weight;
 
 	/// The normalized direction from A to B.
 	b2Vec2 normal;
@@ -81,13 +81,13 @@ private:
 
 public:
 	void SetIndices(int32 a, int32 b);
-	void SetWeight(float32 w) { weight = w; }
+	void SetWeight(float w) { weight = w; }
 	void SetNormal(const b2Vec2& n) { normal = n; }
 	void SetFlags(uint32 f) { flags = f; }
 
 	int32 GetIndexA() const { return indexA; }
 	int32 GetIndexB() const { return indexB; }
-	float32 GetWeight() const { return weight; }
+	float GetWeight() const { return weight; }
 	const b2Vec2& GetNormal() const { return normal; }
 	uint32 GetFlags() const { return flags; }
 
@@ -108,13 +108,13 @@ struct b2ParticleBodyContact
 	b2Fixture* fixture;
 
 	/// Weight of the contact. A value between 0.0f and 1.0f.
-	float32 weight;
+	float weight;
 
 	/// The normalized direction from the particle to the body.
 	b2Vec2 normal;
 
 	/// The effective mass used in calculating force.
-	float32 mass;
+	float mass;
 };
 
 /// Connection between two particles
@@ -127,10 +127,10 @@ struct b2ParticlePair
 	uint32 flags;
 
 	/// The strength of cohesion among the particles.
-	float32 strength;
+	float strength;
 
 	/// The initial distance of the particles.
-	float32 distance;
+	float distance;
 };
 
 /// Connection between three particles
@@ -143,11 +143,11 @@ struct b2ParticleTriad
 	uint32 flags;
 
 	/// The strength of cohesion among the particles.
-	float32 strength;
+	float strength;
 
 	/// Values used for calculation.
 	b2Vec2 pa, pb, pc;
-	float32 ka, kb, kc, s;
+	float ka, kb, kc, s;
 };
 
 struct b2ParticleSystemDef
@@ -186,14 +186,14 @@ struct b2ParticleSystemDef
 
 	/// Set the particle density.
 	/// See SetDensity for details.
-	float32 density;
+	float density;
 
 	/// Change the particle gravity scale. Adjusts the effect of the global
 	/// gravity vector on particles. Default value is 1.0f.
-	float32 gravityScale;
+	float gravityScale;
 
 	/// Particles behave as circles with this radius. In Box2D units.
-	float32 radius;
+	float radius;
 
 	/// Set the maximum number of particles.
 	/// By default, there is no maximum. The particle buffers can continue to
@@ -203,56 +203,56 @@ struct b2ParticleSystemDef
 
 	/// Increases pressure in response to compression
 	/// Smaller values allow more compression
-	float32 pressureStrength;
+	float pressureStrength;
 
 	/// Reduces velocity along the collision normal
 	/// Smaller value reduces less
-	float32 dampingStrength;
+	float dampingStrength;
 
 	/// Restores shape of elastic particle groups
 	/// Larger values increase elastic particle velocity
-	float32 elasticStrength;
+	float elasticStrength;
 
 	/// Restores length of spring particle groups
 	/// Larger values increase spring particle velocity
-	float32 springStrength;
+	float springStrength;
 
 	/// Reduces relative velocity of viscous particles
 	/// Larger values slow down viscous particles more
-	float32 viscousStrength;
+	float viscousStrength;
 
 	/// Produces pressure on tensile particles
 	/// 0~0.2. Larger values increase the amount of surface tension.
-	float32 surfaceTensionPressureStrength;
+	float surfaceTensionPressureStrength;
 
 	/// Smoothes outline of tensile particles
 	/// 0~0.2. Larger values result in rounder, smoother, water-drop-like
 	/// clusters of particles.
-	float32 surfaceTensionNormalStrength;
+	float surfaceTensionNormalStrength;
 
 	/// Produces additional pressure on repulsive particles
 	/// Larger values repulse more
 	/// Negative values mean attraction. The range where particles behave
 	/// stably is about -0.2 to 2.0.
-	float32 repulsiveStrength;
+	float repulsiveStrength;
 
 	/// Produces repulsion between powder particles
 	/// Larger values repulse more
-	float32 powderStrength;
+	float powderStrength;
 
 	/// Pushes particles out of solid particle group
 	/// Larger values repulse more
-	float32 ejectionStrength;
+	float ejectionStrength;
 
 	/// Produces static pressure
 	/// Larger values increase the pressure on neighboring partilces
 	/// For a description of static pressure, see
 	/// http://en.wikipedia.org/wiki/Static_pressure#Static_pressure_in_fluid_dynamics
-	float32 staticPressureStrength;
+	float staticPressureStrength;
 
 	/// Reduces instability in static pressure calculation
 	/// Larger values make stabilize static pressure with fewer iterations
-	float32 staticPressureRelaxation;
+	float staticPressureRelaxation;
 
 	/// Computes static pressure more precisely
 	/// See SetStaticPressureIterations for details
@@ -261,7 +261,7 @@ struct b2ParticleSystemDef
 	/// Determines how fast colors are mixed
 	/// 1.0f ==> mixed immediately
 	/// 0.5f ==> mixed half way each simulation step (see b2World::Step())
-	float32 colorMixingStrength;
+	float colorMixingStrength;
 
 	/// Whether to destroy particles by age when no more particles can be
 	/// created.  See #b2ParticleSystem::SetDestructionByAge() for
@@ -274,7 +274,7 @@ struct b2ParticleSystemDef
 	/// particle is (2^32 - 1) / (1.0f / lifetimeGranularity) seconds.
 	/// With the value set to 1/60 the maximum lifetime or age of a particle is
 	/// 2.27 years.
-	float32 lifetimeGranularity;
+	float lifetimeGranularity;
 };
 
 
@@ -409,25 +409,25 @@ public:
 	/// Particle density affects the mass of the particles, which in turn
 	/// affects how the particles interact with b2Bodies. Note that the density
 	/// does not affect how the particles interact with each other.
-	void SetDensity(float32 density);
+	void SetDensity(float density);
 
 	/// Get the particle density.
-	float32 GetDensity() const;
+	float GetDensity() const;
 
 	/// Change the particle gravity scale. Adjusts the effect of the global
 	/// gravity vector on particles.
-	void SetGravityScale(float32 gravityScale);
+	void SetGravityScale(float gravityScale);
 
 	/// Get the particle gravity scale.
-	float32 GetGravityScale() const;
+	float GetGravityScale() const;
 
 	/// Damping is used to reduce the velocity of particles. The damping
 	/// parameter can be larger than 1.0f but the damping effect becomes
 	/// sensitive to the time step when the damping parameter is large.
-	void SetDamping(float32 damping);
+	void SetDamping(float damping);
 
 	/// Get damping for particles
-	float32 GetDamping() const;
+	float GetDamping() const;
 
 	/// Change the number of iterations when calculating the static pressure of
 	/// particles. By default, 8 iterations. You can reduce the number of
@@ -446,10 +446,10 @@ public:
 	/// You should set this only once, on world start.
 	/// If you change the radius during execution, existing particles may
 	/// explode, shrink, or behave unexpectedly.
-	void SetRadius(float32 radius);
+	void SetRadius(float radius);
 
 	/// Get the particle radius.
-	float32 GetRadius() const;
+	float GetRadius() const;
 
 	/// Get the position of each particle
 	/// Array is length GetParticleCount()
@@ -478,8 +478,8 @@ public:
 	/// Get the weight of each particle
 	/// Array is length GetParticleCount()
 	/// @return the pointer to the head of the particle positions array.
-	float32* GetWeightBuffer();
-	const float32* GetWeightBuffer() const;
+	float* GetWeightBuffer();
+	const float* GetWeightBuffer() const;
 
 	/// Get the user-specified data of each particle.
 	/// Array is length GetParticleCount()
@@ -574,7 +574,7 @@ public:
 	int32 GetStuckCandidateCount() const;
 
 	/// Compute the kinetic energy that can be lost by damping force
-	float32 ComputeCollisionEnergy() const;
+	float ComputeCollisionEnergy() const;
 
 	/// Set strict Particle/Body contact check.
 	/// This is an option that will help ensure correct behavior if there are
@@ -590,12 +590,12 @@ public:
 	/// Set the lifetime (in seconds) of a particle relative to the current
 	/// time.  A lifetime of less than or equal to 0.0f results in the particle
 	/// living forever until it's manually destroyed by the application.
-	void SetParticleLifetime(const int32 index, const float32 lifetime);
+	void SetParticleLifetime(const int32 index, const float lifetime);
 	/// Get the lifetime (in seconds) of a particle relative to the current
 	/// time.  A value > 0.0f is returned if the particle is scheduled to be
 	/// destroyed in the future, values <= 0.0f indicate the particle has an
 	/// infinite lifetime.
-	float32 GetParticleLifetime(const int32 index);
+	float GetParticleLifetime(const int32 index);
 
 	/// Enable / disable destruction of particles in CreateParticle() when
 	/// no more particles can be created due to a prior call to
@@ -616,7 +616,7 @@ public:
 	/// Convert a expiration time value in returned by
 	/// GetExpirationTimeBuffer() to a time in seconds relative to the
 	/// current simulation time.
-	float32 ExpirationTimeToLifetime(const int32 expirationTime) const;
+	float ExpirationTimeToLifetime(const int32 expirationTime) const;
 	/// Get the array of particle indices ordered by reverse lifetime.
 	/// The oldest particle indexes are at the end of the array with the
 	/// newest at the start.  Particles with infinite lifetimes
@@ -707,7 +707,7 @@ public:
 	};
 
 	/// Set the velocity of particle at index with direct floats.
-	void SetParticleVelocity(int32 index, float32 vx, float32 vy);
+	void SetParticleVelocity(int32 index, float vx, float vy);
 
 	/// Get the x-coordinate of particle at index.
 	float GetParticlePositionX(int32 index) const;
@@ -999,12 +999,12 @@ private:
 	void SolveLifetimes(const b2TimeStep& step);
 	void RotateBuffer(int32 start, int32 mid, int32 end);
 
-	float32 GetCriticalVelocity(const b2TimeStep& step) const;
-	float32 GetCriticalVelocitySquared(const b2TimeStep& step) const;
-	float32 GetCriticalPressure(const b2TimeStep& step) const;
-	float32 GetParticleStride() const;
-	float32 GetParticleMass() const;
-	float32 GetParticleInvMass() const;
+	float GetCriticalVelocity(const b2TimeStep& step) const;
+	float GetCriticalVelocitySquared(const b2TimeStep& step) const;
+	float GetCriticalPressure(const b2TimeStep& step) const;
+	float GetParticleStride() const;
+	float GetParticleMass() const;
+	float GetParticleInvMass() const;
 
 	// Get the world's contact filter if any particles with the
 	// b2_contactFilterParticle flag are present in the system.
@@ -1039,7 +1039,7 @@ private:
 	/// Get the time elapsed in b2ParticleSystemDef::lifetimeGranularity.
 	int32 GetQuantizedTimeElapsed() const;
 	/// Convert a lifetime in seconds to an expiration time.
-	int64 LifetimeToExpirationTime(const float32 lifetime) const;
+	int64 LifetimeToExpirationTime(const float lifetime) const;
 
 	bool ForceCanBeApplied(uint32 flags) const;
 	void PrepareForceBuffer();
@@ -1049,21 +1049,21 @@ private:
 		b2ParticleGroup *group, int32 particleIndex,
 		const b2Vec2 &point) const;
 	void InitDampingParameter(
-		float32* invMass, float32* invInertia, float32* tangentDistance,
-		float32 mass, float32 inertia, const b2Vec2& center,
+		float* invMass, float* invInertia, float* tangentDistance,
+		float mass, float inertia, const b2Vec2& center,
 		const b2Vec2& point, const b2Vec2& normal) const;
 	void InitDampingParameterWithRigidGroupOrParticle(
-		float32* invMass, float32* invInertia, float32* tangentDistance,
+		float* invMass, float* invInertia, float* tangentDistance,
 		bool isRigidGroup, b2ParticleGroup* group, int32 particleIndex,
 		const b2Vec2& point, const b2Vec2& normal) const;
-	float32 ComputeDampingImpulse(
-		float32 invMassA, float32 invInertiaA, float32 tangentDistanceA,
-		float32 invMassB, float32 invInertiaB, float32 tangentDistanceB,
-		float32 normalVelocity) const;
+	float ComputeDampingImpulse(
+		float invMassA, float invInertiaA, float tangentDistanceA,
+		float invMassB, float invInertiaB, float tangentDistanceB,
+		float normalVelocity) const;
 	void ApplyDamping(
-		float32 invMass, float32 invInertia, float32 tangentDistance,
+		float invMass, float invInertia, float tangentDistance,
 		bool isRigidGroup, b2ParticleGroup* group, int32 particleIndex,
-		float32 impulse, const b2Vec2& normal);
+		float impulse, const b2Vec2& normal);
 
 	bool m_paused;
 	int32 m_timestamp;
@@ -1073,10 +1073,10 @@ private:
 	bool m_needsUpdateAllGroupFlags;
 	bool m_hasForce;
 	int32 m_iterationIndex;
-	float32 m_inverseDensity;
-	float32 m_particleDiameter;
-	float32 m_inverseDiameter;
-	float32 m_squaredDiameter;
+	float m_inverseDensity;
+	float m_particleDiameter;
+	float m_inverseDiameter;
+	float m_squaredDiameter;
 
 	int32 m_count;
 	int32 m_internalAllocatedCapacity;
@@ -1090,15 +1090,15 @@ private:
 	b2Vec2* m_forceBuffer;
 	/// m_weightBuffer is populated in ComputeWeight and used in
 	/// ComputeDepth(), SolveStaticPressure() and SolvePressure().
-	float32* m_weightBuffer;
+	float* m_weightBuffer;
 	/// When any particles have the flag b2_staticPressureParticle,
 	/// m_staticPressureBuffer is first allocated and used in
 	/// SolveStaticPressure() and SolvePressure().  It will be reallocated on
 	/// subsequent CreateParticle() calls.
-	float32* m_staticPressureBuffer;
+	float* m_staticPressureBuffer;
 	/// m_accumulationBuffer is used in many functions as a temporary buffer
 	/// for scalar values.
-	float32* m_accumulationBuffer;
+	float* m_accumulationBuffer;
 	/// When any particles have the flag b2_tensileParticle,
 	/// m_accumulation2Buffer is first allocated and used in SolveTensile()
 	/// as a temporary buffer for vector values.  It will be reallocated on
@@ -1108,7 +1108,7 @@ private:
 	/// m_depthBuffer is first allocated and populated in ComputeDepth() and
 	/// used in SolveSolid(). It will be reallocated on subsequent
 	/// CreateParticle() calls.
-	float32* m_depthBuffer;
+	float* m_depthBuffer;
 	UserOverridableBuffer<b2ParticleColor> m_colorBuffer;
 	b2ParticleGroup** m_groupBuffer;
 	UserOverridableBuffer<void*> m_userDataBuffer;
@@ -1280,40 +1280,40 @@ inline bool b2ParticleSystem::GetStrictContactCheck() const
 	return m_def.strictContactCheck;
 }
 
-inline void b2ParticleSystem::SetRadius(float32 radius)
+inline void b2ParticleSystem::SetRadius(float radius)
 {
 	m_particleDiameter = 2 * radius;
 	m_squaredDiameter = m_particleDiameter * m_particleDiameter;
 	m_inverseDiameter = 1 / m_particleDiameter;
 }
 
-inline void b2ParticleSystem::SetDensity(float32 density)
+inline void b2ParticleSystem::SetDensity(float density)
 {
 	m_def.density = density;
 	m_inverseDensity =  1 / m_def.density;
 }
 
-inline float32 b2ParticleSystem::GetDensity() const
+inline float b2ParticleSystem::GetDensity() const
 {
 	return m_def.density;
 }
 
-inline void b2ParticleSystem::SetGravityScale(float32 gravityScale)
+inline void b2ParticleSystem::SetGravityScale(float gravityScale)
 {
 	m_def.gravityScale = gravityScale;
 }
 
-inline float32 b2ParticleSystem::GetGravityScale() const
+inline float b2ParticleSystem::GetGravityScale() const
 {
 	return m_def.gravityScale;
 }
 
-inline void b2ParticleSystem::SetDamping(float32 damping)
+inline void b2ParticleSystem::SetDamping(float damping)
 {
 	m_def.dampingStrength = damping;
 }
 
-inline float32 b2ParticleSystem::GetDamping() const
+inline float b2ParticleSystem::GetDamping() const
 {
 	return m_def.dampingStrength;
 }
@@ -1328,43 +1328,43 @@ inline int32 b2ParticleSystem::GetStaticPressureIterations() const
 	return m_def.staticPressureIterations;
 }
 
-inline float32 b2ParticleSystem::GetRadius() const
+inline float b2ParticleSystem::GetRadius() const
 {
 	return m_particleDiameter / 2;
 }
 
-inline float32 b2ParticleSystem::GetCriticalVelocity(const b2TimeStep& step) const
+inline float b2ParticleSystem::GetCriticalVelocity(const b2TimeStep& step) const
 {
 	return m_particleDiameter * step.inv_dt;
 }
 
-inline float32 b2ParticleSystem::GetCriticalVelocitySquared(
+inline float b2ParticleSystem::GetCriticalVelocitySquared(
 	const b2TimeStep& step) const
 {
-	float32 velocity = GetCriticalVelocity(step);
+	float velocity = GetCriticalVelocity(step);
 	return velocity * velocity;
 }
 
-inline float32 b2ParticleSystem::GetCriticalPressure(const b2TimeStep& step) const
+inline float b2ParticleSystem::GetCriticalPressure(const b2TimeStep& step) const
 {
 	return m_def.density * GetCriticalVelocitySquared(step);
 }
 
-inline float32 b2ParticleSystem::GetParticleStride() const
+inline float b2ParticleSystem::GetParticleStride() const
 {
 	return b2_particleStride * m_particleDiameter;
 }
 
-inline float32 b2ParticleSystem::GetParticleMass() const
+inline float b2ParticleSystem::GetParticleMass() const
 {
-	float32 stride = GetParticleStride();
+	float stride = GetParticleStride();
 	return m_def.density * stride * stride;
 }
 
-inline float32 b2ParticleSystem::GetParticleInvMass() const
+inline float b2ParticleSystem::GetParticleInvMass() const
 {
 	// mass = density * stride^2, so we take the inverse of this.
-	float32 inverseStride = m_inverseDiameter * (1.0f / b2_particleStride);
+	float inverseStride = m_inverseDiameter * (1.0f / b2_particleStride);
 	return m_inverseDensity * inverseStride * inverseStride;
 }
 
@@ -1378,7 +1378,7 @@ inline b2Vec2* b2ParticleSystem::GetVelocityBuffer()
 	return m_velocityBuffer.data;
 }
 
-inline float32* b2ParticleSystem::GetWeightBuffer()
+inline float* b2ParticleSystem::GetWeightBuffer()
 {
 	return m_weightBuffer;
 }
@@ -1429,7 +1429,7 @@ inline const b2ParticleGroup* const* b2ParticleSystem::GetGroupBuffer() const
 	return m_groupBuffer;
 }
 
-inline const float32* b2ParticleSystem::GetWeightBuffer() const
+inline const float* b2ParticleSystem::GetWeightBuffer() const
 {
 	return m_weightBuffer;
 }
@@ -1472,8 +1472,8 @@ inline void b2ParticleSystem::ParticleApplyLinearImpulse(int32 index,
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 inline void b2ParticleSystem::SetParticleVelocity(int32 index,
-												  float32 vx,
-												  float32 vy)
+												  float vx,
+												  float vy)
 {
 	b2Vec2& v = GetVelocityBuffer()[index];
 	v.x = vx;
@@ -1517,7 +1517,7 @@ inline int b2ParticleSystem::CopyWeightBuffer(int startIndex,
 											  void* outBuf,
 											  int size) const
 {
-	int copySize = numParticles * sizeof(float32);
+	int copySize = numParticles * sizeof(float);
 	void* inBufWithOffset = (void*) (GetWeightBuffer() + startIndex);
 	return CopyBuffer(startIndex, numParticles, inBufWithOffset, outBuf, size,
 					  copySize);

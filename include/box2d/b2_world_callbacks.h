@@ -277,9 +277,9 @@ public:
 	///   b2World::RayCast.
 	/// @return <=0 to ignore rest of particle system, fraction to ignore
 	/// particles that are farther away.
-	virtual float32 ReportParticle(const b2ParticleSystem* particleSystem,
+	virtual float ReportParticle(const b2ParticleSystem* particleSystem,
 								   int32 index, const b2Vec2& point,
-								   const b2Vec2& normal, float32 fraction)
+								   const b2Vec2& normal, float fraction)
 	{
 		B2_NOT_USED(particleSystem);
 		B2_NOT_USED(index);

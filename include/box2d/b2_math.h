@@ -189,20 +189,20 @@ struct B2_API b2Vec3
 	}
 
   /// Get the length of this vector (the norm).
-	float32 Length() const
+	float Length() const
 	{
 		return b2Sqrt(x * x + y * y + z * z);
 	}
 
 	/// Convert this vector into a unit vector. Returns the length.
-	float32 Normalize()
+	float Normalize()
 	{
-		float32 length = Length();
+		float length = Length();
 		if (length < b2_epsilon)
 		{
 			return 0.0f;
 		}
-		float32 invLength = 1.0f / length;
+		float invLength = 1.0f / length;
 		x *= invLength;
 		y *= invLength;
 		z *= invLength;
@@ -220,9 +220,9 @@ struct b2Vec4
 	b2Vec4() {}
 
 	/// Construct using coordinates.
-	b2Vec4(float32 x, float32 y, float32 z, float32 w) : x(x), y(y), z(z), w(w) {}
+	b2Vec4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
-	float32 x, y, z, w;
+	float x, y, z, w;
 };
 
 /// A 2-by-2 matrix. Stored in column-major order.
@@ -417,16 +417,16 @@ struct B2_API b2Transform
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Get x-coordinate of p.
-	float32 GetPositionX() const { return p.x; }
+	float GetPositionX() const { return p.x; }
 
 	/// Get y-coordinate of p.
-	float32 GetPositionY() const { return p.y; }
+	float GetPositionY() const { return p.y; }
 
 	/// Get sine-component of q.
-	float32 GetRotationSin() const { return q.s; }
+	float GetRotationSin() const { return q.s; }
 
 	/// Get cosine-component of q.
-	float32 GetRotationCos() const { return q.c; }
+	float GetRotationCos() const { return q.c; }
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 	b2Vec2 p;

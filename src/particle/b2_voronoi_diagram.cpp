@@ -52,10 +52,10 @@ void b2VoronoiDiagram::AddGenerator(
 	g.necessary = necessary;
 }
 
-void b2VoronoiDiagram::Generate(float32 radius, float32 margin)
+void b2VoronoiDiagram::Generate(float radius, float margin)
 {
 	b2Assert(m_diagram == NULL);
-	float32 inverseRadius = 1 / radius;
+	float inverseRadius = 1 / radius;
 	b2Vec2 lower(+b2_maxFloat, +b2_maxFloat);
 	b2Vec2 upper(-b2_maxFloat, -b2_maxFloat);
 	for (int32 k = 0; k < m_generatorCount; k++)
@@ -162,12 +162,12 @@ void b2VoronoiDiagram::Generate(float32 radius, float32 margin)
 		Generator* b = k;
 		if (a != b)
 		{
-			float32 ax = a->center.x - x;
-			float32 ay = a->center.y - y;
-			float32 bx = b->center.x - x;
-			float32 by = b->center.y - y;
-			float32 a2 = ax * ax + ay * ay;
-			float32 b2 = bx * bx + by * by;
+			float ax = a->center.x - x;
+			float ay = a->center.y - y;
+			float bx = b->center.x - x;
+			float by = b->center.y - y;
+			float a2 = ax * ax + ay * ay;
+			float b2 = bx * bx + by * by;
 			if (a2 > b2)
 			{
 				m_diagram[i] = b;

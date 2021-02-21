@@ -54,7 +54,7 @@ public:
 	bool TestPoint(const b2Transform& transform, const b2Vec2& p) const override;
 
 	// @see b2Shape::ComputeDistance
-	void ComputeDistance(const b2Transform& xf, const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const;
+	void ComputeDistance(const b2Transform& xf, const b2Vec2& p, float* distance, b2Vec2* normal, int32 childIndex) const;
 
 	/// Implement b2Shape.
 	bool RayCast(b2RayCastOutput* output, const b2RayCastInput& input,
@@ -68,7 +68,7 @@ public:
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Set this as an isolated edge, with direct floats.
-	void Set(float32 vx1, float32 vy1, float32 vx2, float32 vy2);
+	void Set(float vx1, float vy1, float vx2, float vy2);
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 	/// These are the edge vertices
@@ -93,10 +93,10 @@ inline b2EdgeShape::b2EdgeShape()
 }
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-inline void b2EdgeShape::Set(float32 vx1,
-														 float32 vy1,
-														 float32 vx2,
-														 float32 vy2) {
+inline void b2EdgeShape::Set(float vx1,
+														 float vy1,
+														 float vx2,
+														 float vy2) {
 	Set(b2Vec2(vx1, vy1), b2Vec2(vx2, vy2));
 }
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API

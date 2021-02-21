@@ -1166,7 +1166,7 @@ void b2World::DrawParticleSystem(const b2ParticleSystem& system)
 	int32 particleCount = system.GetParticleCount();
 	if (particleCount)
 	{
-		float32 radius = system.GetRadius();
+		float radius = system.GetRadius();
 		const b2Vec2* positionBuffer = system.GetPositionBuffer();
 		if (system.m_colorBuffer.data)
 		{
@@ -1298,9 +1298,9 @@ void b2World::DebugDraw()
 	}
 }
 
-static float32 GetSmallestRadius(const b2World* world)
+static float GetSmallestRadius(const b2World* world)
 {
-	float32 smallestRadius = b2_maxFloat;
+	float smallestRadius = b2_maxFloat;
 	for (const b2ParticleSystem* system = world->GetParticleSystemList();
 		 system != NULL;
 		 system = system->GetNext())
@@ -1310,7 +1310,7 @@ static float32 GetSmallestRadius(const b2World* world)
 	return smallestRadius;
 }
 
-int b2World::CalculateReasonableParticleIterations(float32 timeStep) const
+int b2World::CalculateReasonableParticleIterations(float timeStep) const
 {
 	if (m_particleSystemList == NULL)
 		return 1;

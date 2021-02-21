@@ -274,10 +274,10 @@ public:
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 public:
 	/// Constructor which takes direct floats.
-	b2World(float32 gravityX, float32 gravityY);
+	b2World(float gravityX, float gravityY);
 
 	/// Set gravity with direct floats.
-	void SetGravity(float32 gravityX, float32 gravityY);
+	void SetGravity(float gravityX, float gravityY);
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 private:
@@ -430,12 +430,12 @@ inline const b2Profile& b2World::GetProfile() const
 }
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-inline b2World::b2World(float32 gravityX, float32 gravityY)
+inline b2World::b2World(float gravityX, float gravityY)
 {
 	Init(b2Vec2(gravityX, gravityY));
 }
 
-inline void b2World::SetGravity(float32 gravityX, float32 gravityY)
+inline void b2World::SetGravity(float gravityX, float gravityY)
 {
 	SetGravity(b2Vec2(gravityX, gravityY));
 }

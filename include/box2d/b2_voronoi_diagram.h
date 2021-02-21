@@ -42,7 +42,7 @@ public:
 	/// in the same range as the necessary generators exist.
 	/// @param the interval of the diagram.
 	/// @param margin for which the range of the diagram is extended.
-	void Generate(float32 radius, float32 margin);
+	void Generate(float radius, float margin);
 
 	/// Callback used by GetNodes().
 	class NodeCallback

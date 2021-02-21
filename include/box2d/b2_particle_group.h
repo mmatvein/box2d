@@ -99,20 +99,20 @@ struct b2ParticleGroupDef
 
 	/// The world angle of the group in radians.
 	/// Rotates the shape by an angle equal to the value of angle.
-	float32 angle;
+	float angle;
 
 	/// The linear velocity of the group's origin in world co-ordinates.
 	b2Vec2 linearVelocity;
 
 	/// The angular velocity of the group.
-	float32 angularVelocity;
+	float angularVelocity;
 
 	/// The color of all particles in the group.
 	b2ParticleColor color;
 
 	/// The strength of cohesion among the particles in a group with flag
 	/// b2_elasticParticle or b2_springParticle.
-	float32 strength;
+	float strength;
 
 	/// The shape where particles will be added.
 	const b2Shape* shape;
@@ -125,7 +125,7 @@ struct b2ParticleGroupDef
 
 	/// The interval of particles in the shape.
 	/// If it is 0, b2_particleStride * particleDiameter is used instead.
-	float32 stride;
+	float stride;
 
 	/// The number of particles in addition to ones added in the shape.
 	int32 particleCount;
@@ -135,7 +135,7 @@ struct b2ParticleGroupDef
 
 	/// Lifetime of the particle group in seconds.  A value <= 0.0f indicates a
 	/// particle group with infinite lifetime.
-	float32 lifetime;
+	float lifetime;
 
 	/// Use this to store application-specific group data.
 	void* userData;
@@ -161,7 +161,7 @@ struct b2ParticleGroupDef
 									   float radius);
 
 	/// Set position with direct floats.
-	void SetPosition(float32 x, float32 y);
+	void SetPosition(float x, float y);
 
 	/// Set color with direct ints.
 	void SetColor(int32 r, int32 g, int32 b, int32 a);
@@ -201,10 +201,10 @@ public:
 	void SetGroupFlags(uint32 flags);
 
 	/// Get the total mass of the group: the sum of all particles in it.
-	float32 GetMass() const;
+	float GetMass() const;
 
 	/// Get the moment of inertia for the group.
-	float32 GetInertia() const;
+	float GetInertia() const;
 
 	/// Get the center of gravity for the group.
 	b2Vec2 GetCenter() const;
@@ -213,7 +213,7 @@ public:
 	b2Vec2 GetLinearVelocity() const;
 
 	/// Get the angular velocity of the group.
-	float32 GetAngularVelocity() const;
+	float GetAngularVelocity() const;
 
 	/// Get the position of the group's origin and rotation.
 	/// Used only with groups of rigid particles.
@@ -225,7 +225,7 @@ public:
 
 	/// Get the rotational angle of the particle group as a whole.
 	/// Used only with groups of rigid particles.
-	float32 GetAngle() const;
+	float GetAngle() const;
 
 	/// Get the world linear velocity of a world point, from the average linear
 	/// and angular velocities of the particle group.
@@ -266,16 +266,16 @@ private:
 	b2ParticleSystem* m_system;
 	int32 m_firstIndex, m_lastIndex;
 	uint32 m_groupFlags;
-	float32 m_strength;
+	float m_strength;
 	b2ParticleGroup* m_prev;
 	b2ParticleGroup* m_next;
 
 	mutable int32 m_timestamp;
-	mutable float32 m_mass;
-	mutable float32 m_inertia;
+	mutable float m_mass;
+	mutable float m_inertia;
 	mutable b2Vec2 m_center;
 	mutable b2Vec2 m_linearVelocity;
-	mutable float32 m_angularVelocity;
+	mutable float m_angularVelocity;
 	mutable b2Transform m_transform;
 
 	void* m_userData;
@@ -330,13 +330,13 @@ inline uint32 b2ParticleGroup::GetGroupFlags() const
 	return m_groupFlags & ~b2_particleGroupInternalMask;
 }
 
-inline float32 b2ParticleGroup::GetMass() const
+inline float b2ParticleGroup::GetMass() const
 {
 	UpdateStatistics();
 	return m_mass;
 }
 
-inline float32 b2ParticleGroup::GetInertia() const
+inline float b2ParticleGroup::GetInertia() const
 {
 	UpdateStatistics();
 	return m_inertia;
@@ -354,7 +354,7 @@ inline b2Vec2 b2ParticleGroup::GetLinearVelocity() const
 	return m_linearVelocity;
 }
 
-inline float32 b2ParticleGroup::GetAngularVelocity() const
+inline float b2ParticleGroup::GetAngularVelocity() const
 {
 	UpdateStatistics();
 	return m_angularVelocity;
@@ -370,7 +370,7 @@ inline const b2Vec2& b2ParticleGroup::GetPosition() const
 	return m_transform.p;
 }
 
-inline float32 b2ParticleGroup::GetAngle() const
+inline float b2ParticleGroup::GetAngle() const
 {
 	return m_transform.q.GetAngle();
 }
@@ -398,7 +398,7 @@ inline void b2ParticleGroup::DestroyParticles()
 }
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-inline void b2ParticleGroupDef::SetPosition(float32 x, float32 y)
+inline void b2ParticleGroupDef::SetPosition(float x, float y)
 {
 	position.Set(x, y);
 }

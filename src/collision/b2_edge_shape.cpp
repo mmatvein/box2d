@@ -61,7 +61,7 @@ bool b2EdgeShape::TestPoint(const b2Transform& xf, const b2Vec2& p) const
 	return false;
 }
 
-void b2EdgeShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const
+void b2EdgeShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float* distance, b2Vec2* normal, int32 childIndex) const
 {
 	B2_NOT_USED(childIndex);
 
@@ -70,10 +70,10 @@ void b2EdgeShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float3
 
 	b2Vec2 d = p - v1;
 	b2Vec2 s = v2 - v1;
-	float32 ds = b2Dot(d, s);
+	float ds = b2Dot(d, s);
 	if (ds > 0)
 	{
-		float32 s2 = b2Dot(s, s);
+		float s2 = b2Dot(s, s);
 		if (ds > s2)
 		{
 			d = p - v2;
@@ -84,7 +84,7 @@ void b2EdgeShape::ComputeDistance(const b2Transform& xf, const b2Vec2& p, float3
 		}
 	}
 
-	float32 d1 = d.Length();
+	float d1 = d.Length();
 	*distance = d1;
 	*normal = d1 > 0 ? 1 / d1 * d : b2Vec2_zero;
 

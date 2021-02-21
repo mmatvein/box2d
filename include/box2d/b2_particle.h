@@ -129,7 +129,7 @@ public:
 
 	/// Multiplies r, g, b, a members by s where s is a value between 0.0
 	/// and 1.0.
-	b2ParticleColor& operator *= (float32 s)
+	b2ParticleColor& operator *= (float s)
 	{
 		Set((uint8)(r * s), (uint8)(g * s), (uint8)(b * s), (uint8)(a * s));
 		return *this;
@@ -148,7 +148,7 @@ public:
 	}
 
 	/// Scales r, g, b, a members by s returning the modified b2ParticleColor.
-	b2ParticleColor operator * (float32 s) const
+	b2ParticleColor operator * (float s) const
 	{
 		return MultiplyByScalar(s);
 	}
@@ -258,9 +258,9 @@ public:
 
 protected:
 	/// Maximum value of a b2ParticleColor component.
-	static const float32 k_maxValue;
+	static const float k_maxValue;
 	/// 1.0 / k_maxValue.
-	static const float32 k_inverseMaxValue;
+	static const float k_inverseMaxValue;
 	/// Number of bits used to store each b2ParticleColor component.
 	static const uint8 k_bitsPerComponent;
 };
@@ -284,7 +284,7 @@ struct b2ParticleDef
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Set position with direct floats
-	void SetPosition(float32 x, float32 y);
+	void SetPosition(float x, float y);
 
 	/// Set color with direct ints.
 	void SetColor(int32 r, int32 g, int32 b, int32 a);
@@ -308,7 +308,7 @@ struct b2ParticleDef
 
 	/// Lifetime of the particle in seconds.  A value <= 0.0f indicates a
 	/// particle with infinite lifetime.
-	float32 lifetime;
+	float lifetime;
 
 	/// Use this to store application-specific body data.
 	void* userData;
@@ -320,7 +320,7 @@ struct b2ParticleDef
 
 /// A helper function to calculate the optimal number of iterations.
 int32 b2CalculateParticleIterations(
-	float32 gravity, float32 radius, float32 timeStep);
+	float gravity, float radius, float timeStep);
 
 /// Handle to a particle. Particle indices are ephemeral: the same index might
 /// refer to a different particle, from frame-to-frame. If you need to keep a
@@ -352,7 +352,7 @@ private:
 };
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-inline void b2ParticleDef::SetPosition(float32 x, float32 y)
+inline void b2ParticleDef::SetPosition(float x, float y)
 {
 	position.Set(x, y);
 }

@@ -72,7 +72,7 @@ struct B2_API b2BodyDef
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Set position with direct floats.
-	void SetPosition(float32 positionX, float32 positionY);
+	void SetPosition(float positionX, float positionY);
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 	/// The body type: static, kinematic, or dynamic.
@@ -396,13 +396,13 @@ public:
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Get x-coordinate of position.
-	float32 GetPositionX() const { return GetPosition().x; }
+	float GetPositionX() const { return GetPosition().x; }
 
 	/// Get y-coordinate of position.
-	float32 GetPositionY() const { return GetPosition().y; }
+	float GetPositionY() const { return GetPosition().y; }
 
 	/// Set b2Transform using direct floats.
-	void SetTransform(float32 positionX, float32 positionY, float32 angle);
+	void SetTransform(float positionX, float positionY, float angle);
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 private:
@@ -900,12 +900,12 @@ inline const b2World* b2Body::GetWorld() const
 }
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-inline void b2BodyDef::SetPosition(float32 positionX, float32 positionY)
+inline void b2BodyDef::SetPosition(float positionX, float positionY)
 {
 	position.Set(positionX, positionY);
 }
 
-inline void b2Body::SetTransform(float32 positionX, float32 positionY, float32 angle)
+inline void b2Body::SetTransform(float positionX, float positionY, float angle)
 {
 	SetTransform(b2Vec2(positionX, positionY), angle);
 }

@@ -43,7 +43,7 @@ public:
 	bool TestPoint(const b2Transform& transform, const b2Vec2& p) const override;
 
 	// @see b2Shape::ComputeDistance
-	void ComputeDistance(const b2Transform& xf, const b2Vec2& p, float32* distance, b2Vec2* normal, int32 childIndex) const;
+	void ComputeDistance(const b2Transform& xf, const b2Vec2& p, float* distance, b2Vec2* normal, int32 childIndex) const;
 
 	/// Implement b2Shape.
 	/// @note because the circle is solid, rays that start inside do not hit because the normal is
@@ -59,13 +59,13 @@ public:
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	/// Set position with direct floats.
-	void SetPosition(float32 x, float32 y) { m_p.Set(x, y); }
+	void SetPosition(float x, float y) { m_p.Set(x, y); }
 
 	/// Get x-coordinate of position.
-	float32 GetPositionX() const { return m_p.x; }
+	float GetPositionX() const { return m_p.x; }
 
 	/// Get y-coordinate of position.
-	float32 GetPositionY() const { return m_p.y; }
+	float GetPositionY() const { return m_p.y; }
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 	/// Position

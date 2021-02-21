@@ -67,7 +67,7 @@ void b2ParticleGroup::UpdateStatistics() const
 {
 	if (m_timestamp != m_system->m_timestamp)
 	{
-		float32 m = m_system->GetParticleMass();
+		float m = m_system->GetParticleMass();
 		m_mass = 0;
 		m_center.SetZero();
 		m_linearVelocity.SetZero();
