@@ -19,7 +19,6 @@
 
 
 #include <algorithm>
-#include <cfloat>
 
 b2Stat::b2Stat()
 {
