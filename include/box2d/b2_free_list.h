@@ -84,7 +84,7 @@ public:
 	/// Allocate an item from the free list.
 	T* Allocate() {
 		b2IntrusiveListNode* const node = m_freeList.Allocate();
-		if (!node) return NULL;
+		if (!node) return nullptr;
 		return T::GetInstanceFromListNode(node);
 	}
 

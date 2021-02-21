@@ -31,7 +31,7 @@ class b2GrowableBuffer
 {
 public:
 	b2GrowableBuffer(b2BlockAllocator& allocator) :
-		data(NULL),
+		data(nullptr),
 		count(0),
 		capacity(0),
 		allocator(&allocator)
@@ -47,12 +47,12 @@ public:
 	}
 
 	b2GrowableBuffer(const b2GrowableBuffer<T>& rhs) :
-		data(NULL),
+		data(nullptr),
 		count(rhs.count),
 		capacity(rhs.capacity),
 		allocator(rhs.allocator)
 	{
-		if (rhs.data != NULL)
+		if (rhs.data != nullptr)
 		{
 			data = (T*) allocator->Allocate(sizeof(T) * capacity);
 			memcpy(data, rhs.data, sizeof(T) * count);
@@ -102,11 +102,11 @@ public:
 
 	void Free()
 	{
-		if (data == NULL)
+		if (data == nullptr)
 			return;
 
 		allocator->Free(data, sizeof(data[0]) * capacity);
-		data = NULL;
+		data = nullptr;
 		capacity = 0;
 		count = 0;
 	}

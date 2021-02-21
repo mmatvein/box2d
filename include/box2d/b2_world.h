@@ -187,7 +187,7 @@ public:
 
 	/// Get the world particle-system list. With the returned body, use
 	/// b2ParticleSystem::GetNext to get the next particle-system in the world
-	/// list. A NULL particle-system indicates the end of the list.
+	/// list. A nullptr particle-system indicates the end of the list.
 	/// @return the head of the world particle-system list.
 	b2ParticleSystem* GetParticleSystemList();
 	const b2ParticleSystem* GetParticleSystemList() const;

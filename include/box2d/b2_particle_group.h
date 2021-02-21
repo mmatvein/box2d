@@ -64,18 +64,18 @@ struct b2ParticleGroupDef
 		angularVelocity = 0;
 		color = b2ParticleColor_zero;
 		strength = 1;
-		shape = NULL;
-		shapes = NULL;
+		shape = nullptr;
+		shapes = nullptr;
 		shapeCount = 0;
 		stride = 0;
 		particleCount = 0;
-		positionData = NULL;
+		positionData = nullptr;
 		lifetime = 0.0f;
-		userData = NULL;
-		group = NULL;
+		userData = nullptr;
+		group = nullptr;
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-		circleShapes = NULL;
+		circleShapes = nullptr;
 		ownShapesArray = false;
 #endif // LIQUIDFUN_EXTERNAL_LANGUAGE_API
 	}

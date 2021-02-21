@@ -107,7 +107,7 @@ public:
 		// Allocate a slab if needed here.
 		if (m_freeList.GetFreeList()->GetFreeList().IsEmpty() &&
 			!AllocateSlab())
-			return NULL;
+			return nullptr;
 		return m_freeList.Allocate();
 	}
 

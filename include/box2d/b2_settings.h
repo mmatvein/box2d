@@ -115,7 +115,7 @@ typedef void (*b2FreeFunction)(void* mem, void* callbackData);
 
 /// Set alloc and free callbacks to override the default behavior of using
 /// malloc() and free() for dynamic memory allocation.
-/// Set allocCallback and freeCallback to NULL to restore the default
+/// Set allocCallback and freeCallback to nullptr to restore the default
 /// allocator (malloc / free).
 void b2SetAllocFreeCallbacks(b2AllocFunction allocCallback,
 							 b2FreeFunction freeCallback,

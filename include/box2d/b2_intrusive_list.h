@@ -219,7 +219,7 @@ private:
 	Class, NodeMemberName, FunctionName) \
 	static Class* FunctionName(b2IntrusiveListNode *node) \
 	{ \
-		Class *cls = NULL; \
+		Class *cls = nullptr; \
 		/* This effectively performs offsetof(Class, NodeMemberName) */ \
 		/* which ends up in the undefined behavior realm of C++ but in */ \
 		/* practice this works with most compilers. */ \

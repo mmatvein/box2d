@@ -278,8 +278,8 @@ struct b2ParticleDef
 		velocity = b2Vec2_zero;
 		color = b2ParticleColor_zero;
 		lifetime = 0.0f;
-		userData = NULL;
-		group = NULL;
+		userData = nullptr;
+		group = nullptr;
 	}
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API

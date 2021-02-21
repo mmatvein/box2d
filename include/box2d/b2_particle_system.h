@@ -365,7 +365,7 @@ public:
 
 	/// Get the world particle group list. With the returned group, use
 	/// b2ParticleGroup::GetNext to get the next group in the world list.
-	/// A NULL group indicates the end of the list.
+	/// A nullptr group indicates the end of the list.
 	/// @return the head of the world particle group list.
 	b2ParticleGroup* GetParticleGroupList();
 	const b2ParticleGroup* GetParticleGroupList() const;
@@ -753,7 +753,7 @@ private:
 	{
 		UserOverridableBuffer()
 		{
-			data = NULL;
+			data = nullptr;
 			userSuppliedCapacity = 0;
 		}
 		T* data;
