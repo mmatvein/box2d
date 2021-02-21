@@ -18,6 +18,7 @@
 #include "box2d/b2_stat.h"
 
 
+#include <limits>
 #include <algorithm>
 
 b2Stat::b2Stat()
@@ -61,7 +62,7 @@ void b2Stat::Clear()
 {
 	m_count = 0;
 	m_total = 0;
-	m_min = FLT_MAX;
-	m_max = -FLT_MAX;
+	m_min = std::numeric_limits<float>::max();
+	m_max = std::numeric_limits<float>::lowest();
 }
 

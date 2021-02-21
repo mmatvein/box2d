@@ -18,8 +18,6 @@
 #ifndef B2_STAT
 #define B2_STAT
 
-#include "b2_types.h"
-
 /// Calculates min/max/mean of a set of samples
 class b2Stat
 {
@@ -49,7 +47,7 @@ public:
 private:
 
 	int m_count;
-	float64 m_total;
+	double m_total;
 	float m_min;
 	float m_max;
 };
