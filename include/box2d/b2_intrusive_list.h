@@ -19,6 +19,7 @@
 #define B2_INTRUSIVE_LIST
 
 #include "b2_types.h"
+#include "b2_common.h"
 
 // Whether to enable b2IntrusiveList::ValidateList().
 // Be careful when enabling this since this changes the size of
