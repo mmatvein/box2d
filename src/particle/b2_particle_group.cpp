@@ -26,13 +26,13 @@
 b2ParticleGroup::b2ParticleGroup()
 {
 
-	m_system = NULL;
+	m_system = nullptr;
 	m_firstIndex = 0;
 	m_lastIndex = 0;
 	m_groupFlags = 0;
 	m_strength = 1.0f;
-	m_prev = NULL;
-	m_next = NULL;
+	m_prev = nullptr;
+	m_next = nullptr;
 
 	m_timestamp = -1;
 	m_mass = 0;
@@ -42,7 +42,7 @@ b2ParticleGroup::b2ParticleGroup()
 	m_angularVelocity = 0;
 	m_transform.SetIdentity();
 
-	m_userData = NULL;
+	m_userData = nullptr;
 
 }
 
@@ -127,12 +127,12 @@ void b2ParticleGroupDef::FreeShapesMemory() {
 	if (circleShapes)
 	{
 		delete[] circleShapes;
-		circleShapes = NULL;
+		circleShapes = nullptr;
 	}
 	if (ownShapesArray && shapes)
 	{
 		delete[] shapes;
-		shapes = NULL;
+		shapes = nullptr;
 		ownShapesArray = false;
 	}
 }

@@ -54,7 +54,7 @@ static int32 b2_numAllocs = 0;
 // Initialize default allocator.
 static b2AllocFunction b2_allocCallback = b2AllocDefault;
 static b2FreeFunction b2_freeCallback = b2FreeDefault;
-static void *b2_callbackData = NULL;
+static void *b2_callbackData = nullptr;
 
 // Default implementation of b2AllocFunction.
 static void* b2AllocDefault(int32 size, void* callbackData)
@@ -72,7 +72,7 @@ static void b2FreeDefault(void* mem, void* callbackData)
 
 /// Set alloc and free callbacks to override the default behavior of using
 /// malloc() and free() for dynamic memory allocation.
-/// Set allocCallback and freeCallback to NULL to restore the default
+/// Set allocCallback and freeCallback to nullptr to restore the default
 /// allocator (malloc / free).
 void b2SetAllocFreeCallbacks(b2AllocFunction allocCallback,
 							 b2FreeFunction freeCallback, void* callbackData)
@@ -90,7 +90,7 @@ void b2SetAllocFreeCallbacks(b2AllocFunction allocCallback,
 	{
 		b2_allocCallback = b2AllocDefault;
 		b2_freeCallback = b2FreeDefault;
-		b2_callbackData = NULL;
+		b2_callbackData = nullptr;
 	}
 }
 

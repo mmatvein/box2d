@@ -411,16 +411,16 @@ b2ParticleSystem::b2ParticleSystem(const b2ParticleSystemDef* def,
 
 	m_count = 0;
 	m_internalAllocatedCapacity = 0;
-	m_forceBuffer = NULL;
-	m_weightBuffer = NULL;
-	m_staticPressureBuffer = NULL;
-	m_accumulationBuffer = NULL;
-	m_accumulation2Buffer = NULL;
-	m_depthBuffer = NULL;
-	m_groupBuffer = NULL;
+	m_forceBuffer = nullptr;
+	m_weightBuffer = nullptr;
+	m_staticPressureBuffer = nullptr;
+	m_accumulationBuffer = nullptr;
+	m_accumulation2Buffer = nullptr;
+	m_depthBuffer = nullptr;
+	m_groupBuffer = nullptr;
 
 	m_groupCount = 0;
-	m_groupList = NULL;
+	m_groupList = nullptr;
 
 	b2Assert(def->lifetimeGranularity > 0.0f);
 	m_def = *def;
@@ -464,11 +464,11 @@ b2ParticleSystem::~b2ParticleSystem()
 
 template <typename T> void b2ParticleSystem::FreeBuffer(T** b, int capacity)
 {
-	if (*b == NULL)
+	if (*b == nullptr)
 		return;
 
 	m_world->m_blockAllocator.Free(*b, sizeof(**b) * capacity);
-	*b = NULL;
+	*b = nullptr;
 }
 
 // Free buffer, if it was allocated with b2World's block allocator
@@ -502,7 +502,7 @@ template <typename T> T* b2ParticleSystem::ReallocateBuffer(
 	int32 newCapacity, bool deferred)
 {
 	b2Assert(newCapacity > oldCapacity);
-	// A 'deferred' buffer is reallocated only if it is not NULL.
+	// A 'deferred' buffer is reallocated only if it is not nullptr.
 	// If 'userSuppliedCapacity' is not zero, buffer is user supplied and must
 	// be kept.
 	b2Assert(!userSuppliedCapacity || newCapacity <= userSuppliedCapacity);
@@ -702,7 +702,7 @@ int32 b2ParticleSystem::CreateParticle(const b2ParticleDef& def)
 	}
 	if (m_handleIndexBuffer.data)
 	{
-		m_handleIndexBuffer.data[index] = NULL;
+		m_handleIndexBuffer.data[index] = nullptr;
 	}
 	Proxy& proxy = m_proxyBuffer.Append();
 
@@ -970,7 +970,7 @@ void b2ParticleSystem::CreateParticlesWithShapesForGroup(
 		{
 			b2Assert(false);
 			B2_NOT_USED(allocator);
-			return NULL;
+			return nullptr;
 		}
 		int32 GetChildCount() const
 		{
@@ -1080,7 +1080,7 @@ b2ParticleGroup* b2ParticleSystem::CreateParticleGroup(
 	group->m_strength = groupDef.strength;
 	group->m_userData = groupDef.userData;
 	group->m_transform = transform;
-	group->m_prev = NULL;
+	group->m_prev = nullptr;
 	group->m_next = m_groupList;
 	if (m_groupList)
 	{
@@ -1188,7 +1188,7 @@ void b2ParticleSystem::InitializeParticleLists(
 	{
 		ParticleListNode* node = &nodeBuffer[i];
 		node->list = node;
-		node->next = NULL;
+		node->next = nullptr;
 		node->count = 1;
 		node->index = i + bufferIndex;
 	}
@@ -1227,10 +1227,10 @@ void b2ParticleSystem::MergeParticleLists(
 {
 	// Insert listB between index 0 and 1 of listA
 	// Example:
-	//     listA => a1 => a2 => a3 => NULL
-	//     listB => b1 => b2 => NULL
+	//     listA => a1 => a2 => a3 => nullptr
+	//     listB => b1 => b2 => nullptr
 	// to
-	//     listA => listB => b1 => b2 => a1 => a2 => a3 => NULL
+	//     listA => listB => b1 => b2 => a1 => a2 => a3 => nullptr
 	b2Assert(listA != listB);
 	for (ParticleListNode* b = listB;;)
 	{
@@ -1288,10 +1288,10 @@ void b2ParticleSystem::MergeParticleListAndNode(
 {
 	// Insert node between index 0 and 1 of list
 	// Example:
-	//     list => a1 => a2 => a3 => NULL
-	//     node => NULL
+	//     list => a1 => a2 => a3 => nullptr
+	//     node => nullptr
 	// to
-	//     list => node => a1 => a2 => a3 => NULL
+	//     list => node => a1 => a2 => a3 => nullptr
 	b2Assert(node != list);
 	b2Assert(node->list == node);
 	b2Assert(node->count == 1);
@@ -1394,7 +1394,7 @@ int32 b2ParticleSystem::CloneParticle(int32 oldIndex, b2ParticleGroup* group)
 		b2ParticleHandle* handle = m_handleIndexBuffer.data[oldIndex];
 		if (handle) handle->SetIndex(newIndex);
 		m_handleIndexBuffer.data[newIndex] = handle;
-		m_handleIndexBuffer.data[oldIndex] = NULL;
+		m_handleIndexBuffer.data[oldIndex] = nullptr;
 	}
 	if (m_lastBodyContactStepBuffer.data)
 	{
@@ -1640,7 +1640,7 @@ void b2ParticleSystem::DestroyParticleGroup(b2ParticleGroup* group)
 	SetGroupFlags(group, 0);
 	for (int32 i = group->m_firstIndex; i < group->m_lastIndex; i++)
 	{
-		m_groupBuffer[i] = NULL;
+		m_groupBuffer[i] = nullptr;
 	}
 
 	if (group->m_prev)
@@ -1903,7 +1903,7 @@ inline void b2ParticleSystem::GatherChecksOneParticle(
 		out.comparatorIndex = (uint16)comparatorIndex;
 
 		// This is faster inside the 'for' since there are so few iterations.
-		if (nextUncheckedIndex != NULL)
+		if (nextUncheckedIndex != nullptr)
 		{
 			*nextUncheckedIndex = comparatorIndex + NUM_V32_SLOTS;
 		}
@@ -1941,7 +1941,7 @@ void b2ParticleSystem::GatherChecks(
 		GatherChecksOneParticle(bottomRightBound,
 								bottomStartIndex,
 								particleIndex,
-								NULL,
+								nullptr,
 								checks);
 	}
 }
@@ -2013,7 +2013,7 @@ static inline bool b2ParticleContactIsZombie(const b2ParticleContact& contact)
 inline b2ContactFilter* b2ParticleSystem::GetParticleContactFilter() const
 {
 	return (m_allParticleFlags & b2_particleContactFilterParticle) ?
-		m_world->m_contactManager.m_contactFilter : NULL;
+		m_world->m_contactManager.m_contactFilter : nullptr;
 }
 
 // Get the world's contact listener if any particles with the
@@ -2021,7 +2021,7 @@ inline b2ContactFilter* b2ParticleSystem::GetParticleContactFilter() const
 inline b2ContactListener* b2ParticleSystem::GetParticleContactListener() const
 {
 	return (m_allParticleFlags & b2_particleContactListenerParticle) ?
-		m_world->m_contactManager.m_contactListener : NULL;
+		m_world->m_contactManager.m_contactListener : nullptr;
 }
 
 // Recalculate 'tag' in proxies using m_positionBuffer.
@@ -2190,7 +2190,7 @@ void b2ParticleSystem::FilterContacts(
 {
 	// Optionally filter the contact.
 	b2ContactFilter* const contactFilter = GetParticleContactFilter();
-	if (contactFilter == NULL)
+	if (contactFilter == nullptr)
 		return;
 
 	contacts.RemoveIf(b2ParticleContactRemovePredicate(this, contactFilter));
@@ -2200,7 +2200,7 @@ void b2ParticleSystem::NotifyContactListenerPreContact(
 	b2ParticlePairSet* particlePairs) const
 {
 	b2ContactListener* const contactListener = GetParticleContactListener();
-	if (contactListener == NULL)
+	if (contactListener == nullptr)
 		return;
 
 	particlePairs->Initialize(m_contactBuffer.Begin(),
@@ -2215,7 +2215,7 @@ void b2ParticleSystem::NotifyContactListenerPostContact(
 	b2ParticlePairSet& particlePairs)
 {
 	b2ContactListener* const contactListener = GetParticleContactListener();
-	if (contactListener == NULL)
+	if (contactListener == nullptr)
 		return;
 
 	// Loop through all new contacts, reporting any new ones, and
@@ -2318,7 +2318,7 @@ void b2ParticleSystem::DetectStuckParticle(int32 particle)
 inline b2ContactListener* b2ParticleSystem::GetFixtureContactListener() const
 {
 	return (m_allParticleFlags & b2_fixtureContactListenerParticle) ?
-		m_world->m_contactManager.m_contactListener : NULL;
+		m_world->m_contactManager.m_contactListener : nullptr;
 }
 
 // Get the world's contact filter if any particles with the
@@ -2326,7 +2326,7 @@ inline b2ContactListener* b2ParticleSystem::GetFixtureContactListener() const
 inline b2ContactFilter* b2ParticleSystem::GetFixtureContactFilter() const
 {
 	return (m_allParticleFlags & b2_fixtureContactFilterParticle) ?
-		m_world->m_contactManager.m_contactFilter : NULL;
+		m_world->m_contactManager.m_contactFilter : nullptr;
 }
 
 /// Compute the axis-aligned bounding box for all particles contained
@@ -2356,7 +2356,7 @@ void b2ParticleSystem::ComputeAABB(b2AABB* const aabb) const
 // Associate a memory allocator with this object.
 FixedSetAllocator::FixedSetAllocator(
 		b2StackAllocator* allocator) :
-	m_buffer(NULL), m_valid(NULL), m_count(0), m_allocator(allocator)
+	m_buffer(nullptr), m_valid(nullptr), m_count(0), m_allocator(allocator)
 {
 	b2Assert(allocator);
 }
@@ -2384,7 +2384,7 @@ void FixedSetAllocator::Clear()
 	if (m_buffer)
 	{
 		m_allocator->Free(m_buffer);
-		m_buffer = NULL;
+		m_buffer = nullptr;
         m_count = 0;
 	}
 }
@@ -2547,7 +2547,7 @@ void b2ParticleSystem::NotifyBodyContactListenerPreContact(
 	FixtureParticleSet* fixtureSet) const
 {
 	b2ContactListener* const contactListener = GetFixtureContactListener();
-	if (contactListener == NULL)
+	if (contactListener == nullptr)
 		return;
 
 	fixtureSet->Initialize(m_bodyContactBuffer.Begin(),
@@ -2562,7 +2562,7 @@ void b2ParticleSystem::NotifyBodyContactListenerPostContact(
 	FixtureParticleSet& fixtureSet)
 {
 	b2ContactListener* const contactListener = GetFixtureContactListener();
-	if (contactListener == NULL)
+	if (contactListener == nullptr)
 		return;
 
 	// Loop through all new contacts, reporting any new ones, and
@@ -3821,7 +3821,7 @@ void b2ParticleSystem::SolveZombie()
 				if (handle)
 				{
 					handle->SetIndex(b2_invalidParticleIndex);
-					m_handleIndexBuffer.data[i] = NULL;
+					m_handleIndexBuffer.data[i] = nullptr;
 					m_handleAllocator.Free(handle);
 				}
 			}
@@ -4245,7 +4245,7 @@ void b2ParticleSystem::SetParticleLifetime(const int32 index,
 {
 	b2Assert(ValidateParticleIndex(index));
 	const bool initializeExpirationTimes =
-		m_indexByExpirationTimeBuffer.data == NULL;
+		m_indexByExpirationTimeBuffer.data == nullptr;
 	m_expirationTimeBuffer.data = RequestBuffer(
 		m_expirationTimeBuffer.data);
 	m_indexByExpirationTimeBuffer.data = RequestBuffer(

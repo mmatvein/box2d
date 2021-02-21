@@ -1175,7 +1175,7 @@ void b2World::DrawParticleSystem(const b2ParticleSystem& system)
 		}
 		else
 		{
-			m_debugDraw->DrawParticles(positionBuffer, radius, NULL, particleCount);
+			m_debugDraw->DrawParticles(positionBuffer, radius, nullptr, particleCount);
 		}
 	}
 }
@@ -1302,7 +1302,7 @@ static float GetSmallestRadius(const b2World* world)
 {
 	float smallestRadius = b2_maxFloat;
 	for (const b2ParticleSystem* system = world->GetParticleSystemList();
-		 system != NULL;
+		 system != nullptr;
 		 system = system->GetNext())
 	{
 		smallestRadius = b2Min(smallestRadius, system->GetRadius());
@@ -1312,7 +1312,7 @@ static float GetSmallestRadius(const b2World* world)
 
 int b2World::CalculateReasonableParticleIterations(float timeStep) const
 {
-	if (m_particleSystemList == NULL)
+	if (m_particleSystemList == nullptr)
 		return 1;
 
 	// Use the smallest radius, since that represents the worst-case.

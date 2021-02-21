@@ -57,7 +57,7 @@ void* b2TrackedBlock::Allocate(uint32 size)
 											size);
 	if (!memory)
 	{
-		return NULL;
+		return nullptr;
 	}
 	return (new(memory) b2TrackedBlock)->GetMemory();
 }

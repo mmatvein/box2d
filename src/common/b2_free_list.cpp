@@ -23,7 +23,7 @@
 /// Allocate an item from the freelist.
 b2IntrusiveListNode* b2FreeList::Allocate()
 {
-	if (m_free.IsEmpty()) return NULL;
+	if (m_free.IsEmpty()) return nullptr;
 	b2IntrusiveListNode * const node = m_free.GetNext();
 	node->Remove();
 	m_allocated.InsertBefore(node);
