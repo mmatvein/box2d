@@ -79,8 +79,8 @@ public:
 	/// @warning This function is locked during callbacks.
 	b2Body* CreateBody(const b2BodyDef* def);
 
-	/// Destroy a rigid body given a definition. No reference to the definition
-	/// is retained. This function is locked during callbacks.
+	/// Destroy a rigid body.
+	/// This function is locked during callbacks.
 	/// @warning This automatically deletes all associated shapes and joints.
 	/// @warning This function is locked during callbacks.
 	void DestroyBody(b2Body* body);
@@ -131,6 +131,13 @@ public:
 	{
 		Step(timeStep, velocityIterations, positionIterations, 1);
 	}
+
+  /// Recommend a value to be used in `Step` for `particleIterations`.
+	/// This calculation is necessarily a simplification and should only be
+	/// used as a starting point. Please see "Particle Iterations" in the
+	/// Programmer's Guide for details.
+	/// @param timeStep is the value to be passed into `Step`.
+	int CalculateReasonableParticleIterations(float timeStep) const;
 
 	/// Manually clear the force buffer on all bodies. By default, forces are cleared automatically
 	/// after each call to Step. The default behavior is modified by calling SetAutoClearForces.
