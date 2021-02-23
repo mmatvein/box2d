@@ -48,6 +48,6 @@ private:
 #if defined(_WIN32)
 	static double s_invFrequency;
 #endif
-};
   int64 m_start;
+};
 #endif
