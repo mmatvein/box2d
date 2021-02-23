@@ -18,6 +18,7 @@
 #ifndef B2_PARTICLE_GROUP
 #define B2_PARTICLE_GROUP
 
+#include "b2_api.h"
 #include "b2_particle.h"
 
 class b2Shape;
@@ -51,7 +52,7 @@ enum b2ParticleGroupFlag
 
 /// A particle group definition holds all the data needed to construct a
 /// particle group.  You can safely re-use these definitions.
-struct b2ParticleGroupDef
+struct B2_API b2ParticleGroupDef
 {
 
 	b2ParticleGroupDef()
@@ -169,7 +170,7 @@ struct b2ParticleGroupDef
 };
 
 /// A group of particles. b2ParticleGroup::CreateParticleGroup creates these.
-class b2ParticleGroup
+class B2_API b2ParticleGroup
 {
 
 public:

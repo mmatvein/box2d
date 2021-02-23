@@ -18,6 +18,7 @@
 #ifndef B2_PARTICLE_SYSTEM_H
 #define B2_PARTICLE_SYSTEM_H
 
+#include "b2_api.h"
 #include "b2_slab_allocator.h"
 #include "b2_growable_buffer.h"
 #include "b2_particle.h"
@@ -50,7 +51,7 @@ struct b2AABB;
 struct FindContactInput;
 struct FindContactCheck;
 
-struct b2ParticleContact
+struct B2_API b2ParticleContact
 {
 private:
 	// 16-bit particle indices consume less memory and thus improve
@@ -96,7 +97,7 @@ public:
 	bool ApproximatelyEqual(const b2ParticleContact& rhs) const;
 };
 
-struct b2ParticleBodyContact
+struct B2_API b2ParticleBodyContact
 {
 	/// Index of the particle making contact.
 	int32 index;
@@ -118,7 +119,7 @@ struct b2ParticleBodyContact
 };
 
 /// Connection between two particles
-struct b2ParticlePair
+struct B2_API b2ParticlePair
 {
 	/// Indices of the respective particles making pair.
 	int32 indexA, indexB;
@@ -134,7 +135,7 @@ struct b2ParticlePair
 };
 
 /// Connection between three particles
-struct b2ParticleTriad
+struct B2_API b2ParticleTriad
 {
 	/// Indices of the respective particles making triad.
 	int32 indexA, indexB, indexC;
@@ -150,7 +151,7 @@ struct b2ParticleTriad
 	float ka, kb, kc, s;
 };
 
-struct b2ParticleSystemDef
+struct B2_API b2ParticleSystemDef
 {
 	b2ParticleSystemDef()
 	{
@@ -278,7 +279,7 @@ struct b2ParticleSystemDef
 };
 
 
-class b2ParticleSystem
+class B2_API b2ParticleSystem
 {
 public:
 	/// Create a particle whose properties have been defined.
