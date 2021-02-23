@@ -18,6 +18,7 @@
 #ifndef B2_GROWABLE_BUFFER_H
 #define B2_GROWABLE_BUFFER_H
 
+#include "b2_api.h"
 #include "b2_block_allocator.h"
 #include <string.h>
 #include <memory.h>
@@ -27,7 +28,7 @@
 /// A simple array-like container, similar to std::vector.
 /// If we ever start using stl, we should replace this with std::vector.
 template <typename T>
-class b2GrowableBuffer
+class B2_API b2GrowableBuffer
 {
 public:
 	b2GrowableBuffer(b2BlockAllocator& allocator) :

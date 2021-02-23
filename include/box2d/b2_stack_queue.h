@@ -18,10 +18,11 @@
 #ifndef B2_STACK_QUEUE
 #define B2_STACK_QUEUE
 
+#include "b2_api.h"
 #include "b2_stack_allocator.h"
 
 template <typename T>
-class b2StackQueue
+class B2_API b2StackQueue
 {
 
 public:

@@ -18,6 +18,7 @@
 #ifndef B2_INTRUSIVE_LIST
 #define B2_INTRUSIVE_LIST
 
+#include "b2_api.h"
 #include "b2_types.h"
 #include "b2_common.h"
 
@@ -62,7 +63,7 @@
 /// 	}
 /// 	return 0;
 /// }
-class b2IntrusiveListNode
+class B2_API b2IntrusiveListNode
 {
 public:
 	/// Initialize the node.
@@ -270,7 +271,7 @@ private:
 /// 	}
 /// }
 template<typename T>
-class b2TypedIntrusiveListNode
+class B2_API b2TypedIntrusiveListNode
 {
 public:
 	b2TypedIntrusiveListNode() { }

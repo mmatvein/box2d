@@ -231,7 +231,7 @@ struct B2_API b2Vec3
 };
 
 /// A 4D column vector with 4 elements.
-struct b2Vec4
+struct B2_API b2Vec4
 {
 	/// Default constructor does nothing (for performance).
 	b2Vec4() {}

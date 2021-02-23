@@ -21,6 +21,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <new>
+#include "b2_api.h"
 #include "b2_intrusive_list.h"
 #include "b2_free_list.h"
 #include "b2_types.h"
@@ -33,7 +34,7 @@
 /// All objects in a slab are constructed when a slab is created and destructed
 /// when a slab is freed.
 template<typename T>
-class b2SlabAllocator
+class B2_API b2SlabAllocator
 {
 private:
 	// Information about a slab.

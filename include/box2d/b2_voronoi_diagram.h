@@ -18,13 +18,14 @@
 #ifndef B2_VORONOI_DIAGRAM
 #define B2_VORONOI_DIAGRAM
 
-#include "box2d/b2_math.h"
+#include "b2_api.h"
+#include "b2_math.h"
 
 class b2StackAllocator;
 struct b2AABB;
 
 /// A field representing the nearest generator from each point.
-class b2VoronoiDiagram
+class B2_API b2VoronoiDiagram
 {
 
 public:

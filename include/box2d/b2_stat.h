@@ -18,8 +18,10 @@
 #ifndef B2_STAT
 #define B2_STAT
 
+#include "b2_api.h"
+
 /// Calculates min/max/mean of a set of samples
-class b2Stat
+class B2_API b2Stat
 {
 public:
 	b2Stat();
