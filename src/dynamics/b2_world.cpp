@@ -355,6 +355,58 @@ void b2World::DestroyJoint(b2Joint* j)
 	}
 }
 
+b2ParticleSystem* b2World::CreateParticleSystem(const b2ParticleSystemDef* def)
+{
+	b2Assert(IsLocked() == false);
+	if (IsLocked())
+	{
+		return NULL;
+	}
+
+	void* mem = m_blockAllocator.Allocate(sizeof(b2ParticleSystem));
+	b2ParticleSystem* p = new (mem) b2ParticleSystem(def, this);
+
+	// Add to world doubly linked list.
+	p->m_prev = NULL;
+	p->m_next = m_particleSystemList;
+	if (m_particleSystemList)
+	{
+		m_particleSystemList->m_prev = p;
+	}
+	m_particleSystemList = p;
+
+	return p;
+}
+
+void b2World::DestroyParticleSystem(b2ParticleSystem* p)
+{
+	b2Assert(m_particleSystemList != NULL);
+	b2Assert(IsLocked() == false);
+	if (IsLocked())
+	{
+		return;
+	}
+
+	// Remove world particleSystem list.
+	if (p->m_prev)
+	{
+		p->m_prev->m_next = p->m_next;
+	}
+
+	if (p->m_next)
+	{
+		p->m_next->m_prev = p->m_prev;
+	}
+
+	if (p == m_particleSystemList)
+	{
+		m_particleSystemList = p->m_next;
+	}
+
+	p->~b2ParticleSystem();
+	m_blockAllocator.Free(p, sizeof(b2ParticleSystem));
+}
+
 //
 void b2World::SetAllowSleeping(bool flag)
 {
