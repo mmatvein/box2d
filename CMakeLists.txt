@@ -1,9 +1,35 @@
 cmake_minimum_required(VERSION 3.8)
 
 # https://cmake.org/cmake/help/latest/command/project.html
-project(box2d VERSION 2.4.1)
+# set(DISABLE_CXX_INIT "")
+if (LIQUIDFUN_SIMD_NEON)
+	# set(DISABLE_CXX_INIT "")
+	# https://stackoverflow.com/a/71041529/5257399
+	# works together with enable_language() below, to ensure C++ support 
+	# is only enabled once CMAKE_CXX_SOURCE_FILE_EXTENSIONS has been updated
+	project(box2d VERSION 2.4.1 LANGUAGES NONE)
+else()
+	project(box2d VERSION 2.4.1)
+endif()
 
 # set(CMAKE_CONFIGURATION_TYPES "Debug;RelWithDebInfo" CACHE STRING "" FORCE)
+
+function(add_neon_extension variable access value current_list_file stack)
+  if (NOT s IN_LIST value)
+    list(PREPEND "${variable}" "s")
+    set("${variable}" "${${variable}}" PARENT_SCOPE)
+  endif ()
+endfunction()
+
+if (LIQUIDFUN_SIMD_NEON)
+	# check_language(CXX)
+	# list(APPEND CMAKE_CXX_SOURCE_FILE_EXTENSIONS s)
+	# set_source_files_properties(file.nonstandard_extention PROPERTIES LANGUAGE CXX)
+	variable_watch(CMAKE_CXX_SOURCE_FILE_EXTENSIONS add_neon_extension)
+  enable_language(CXX)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfloat-abi=softfp -mfpu=neon")
+	# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfpu=neon")
+endif()
 
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)

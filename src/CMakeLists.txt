@@ -1,3 +1,8 @@
+set(PARTICLE_ASSEMBLY_NEON_SOURCE_FILE "")
+if (LIQUIDFUN_SIMD_NEON)
+	set(PARTICLE_ASSEMBLY_NEON_SOURCE_FILE particle/b2_particle_assembly.neon.s)
+endif()
+
 set(BOX2D_SOURCE_FILES
 	collision/b2_broad_phase.cpp
 	collision/b2_chain_shape.cpp
@@ -56,6 +61,7 @@ set(BOX2D_SOURCE_FILES
 	dynamics/b2_world.cpp
 	dynamics/b2_world_callbacks.cpp
 	particle/b2_particle_assembly.cpp
+	${PARTICLE_ASSEMBLY_NEON_SOURCE_FILE}
 	particle/b2_particle_group.cpp
 	particle/b2_particle_system.cpp
 	particle/b2_particle.cpp
@@ -144,6 +150,10 @@ if(MSVC)
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
     OPTIONAL
   )
+endif()
+
+if (LIQUIDFUN_SIMD_NEON)
+	target_compile_definitions(box2d PUBLIC LIQUIDFUN_SIMD_NEON)
 endif()
 
 if (BUILD_SHARED_LIBS)

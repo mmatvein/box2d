@@ -20,7 +20,7 @@
 #include "box2d/b2_world.h"
 
 #if LIQUIDFUN_EXTERNAL_LANGUAGE_API
-#include <Box2D/Collision/Shapes/b2CircleShape.h>
+#include "box2d/b2_circle_shape.h>
 #endif //LIQUIDFUN_EXTERNAL_LANGUAGE_API
 
 b2ParticleGroup::b2ParticleGroup()
